@@ -179,9 +179,9 @@ unitree_legged_msgs::IMU ToRos(UNITREE_LEGGED_SDK::IMU& lcm)
     ros.accelerometer[0] = lcm.accelerometer[0];
     ros.accelerometer[1] = lcm.accelerometer[1];
     ros.accelerometer[2] = lcm.accelerometer[2];
-    // ros.rpy[0] = lcm.rpy[0];
-    // ros.rpy[1] = lcm.rpy[1];
-    // ros.rpy[2] = lcm.rpy[2];
+    ros.rpy[0] = lcm.rpy[0];
+    ros.rpy[1] = lcm.rpy[1];
+    ros.rpy[2] = lcm.rpy[2];
     ros.temperature = lcm.temperature;
     return ros;
 }
@@ -275,15 +275,20 @@ unitree_legged_msgs::HighState ToRos(UNITREE_LEGGED_SDK::HighState& lcm)
     ros.robotID = lcm.robotID;
     ros.SN = lcm.SN;
     ros.bandWidth = lcm.bandWidth;
+    for(int i = 0; i<20; i++){
+        ros.motorState[i] = ToRos(lcm.motorState[i]);
+    }
+    ros.progress = lcm.progress;
     ros.mode = lcm.mode;
     ros.imu = ToRos(lcm.imu);
-    ros.forwardSpeed = lcm.forwardSpeed;
-    ros.sideSpeed = lcm.sideSpeed;
-    ros.rotateSpeed = lcm.rotateSpeed;
+    ros.gaitType = lcm.gaitType;
+    ros.footRaiseHeight = lcm.footRaiseHeight;
     ros.bodyHeight = lcm.bodyHeight;
-    ros.updownSpeed = lcm.updownSpeed;
-    ros.forwardPosition = lcm.forwardPosition;
-    ros.sidePosition = lcm.sidePosition;
+    ros.yawSpeed = lcm.yawSpeed;  
+    for(int i = 0; i<3; i++){
+        ros.position[i] = lcm.position[i];
+        ros.velocity[i] = lcm.velocity[i];
+    }
     for(int i = 0; i<4; i++){
         ros.footPosition2Body[i].x = lcm.footPosition2Body[i].x;
         ros.footPosition2Body[i].y = lcm.footPosition2Body[i].y;
@@ -294,7 +299,6 @@ unitree_legged_msgs::HighState ToRos(UNITREE_LEGGED_SDK::HighState& lcm)
         ros.footForce[i] = lcm.footForce[i];
         ros.footForceEst[i] = lcm.footForceEst[i];
     }
-    ros.tick = lcm.tick;
     for(int i = 0; i<40; i++){
         ros.wirelessRemote[i] = lcm.wirelessRemote[i];
     }
@@ -312,14 +316,17 @@ UNITREE_LEGGED_SDK::HighCmd ToLcm(unitree_legged_msgs::HighCmd& ros, UNITREE_LEG
     lcm.SN = ros.SN;
     lcm.bandWidth = ros.bandWidth;
     lcm.mode = ros.mode;
-    lcm.forwardSpeed = ros.forwardSpeed;
-    lcm.sideSpeed = ros.sideSpeed;
-    lcm.rotateSpeed = ros.rotateSpeed;
+    lcm.gaitType = ros.gaitType;
     lcm.bodyHeight = ros.bodyHeight;
     lcm.footRaiseHeight = ros.footRaiseHeight;
-    lcm.yaw = ros.yaw;
-    lcm.pitch = ros.pitch;
-    lcm.roll = ros.roll;
+    for(int i = 0; i<2; i++){
+        ros.postion[i] = lcm.postion[i];
+        ros.velocity[i] = lcm.velocity[i];       
+    }
+    for(int i = 0; i<3; i++){
+        ros.euler[i] = lcm.euler[i];
+    }
+
     for(int i = 0; i<4; i++){
         lcm.led[i].r = ros.led[i].r;
         lcm.led[i].g = ros.led[i].g;
@@ -327,7 +334,6 @@ UNITREE_LEGGED_SDK::HighCmd ToLcm(unitree_legged_msgs::HighCmd& ros, UNITREE_LEG
     }
     for(int i = 0; i<40; i++){
         lcm.wirelessRemote[i] = ros.wirelessRemote[i];
-        lcm.AppRemote[i] = ros.AppRemote[i];
     }
     lcm.reserve = ros.reserve;
     lcm.crc = ros.crc;

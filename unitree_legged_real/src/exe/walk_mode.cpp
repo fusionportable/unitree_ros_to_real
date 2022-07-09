@@ -12,6 +12,9 @@ Use of this source code is governed by the MPL-2.0 license, see LICENSE.
 #include <unitree_legged_msgs/HighState.h>
 #include "convert.h"
 
+#define SDK3_2
+
+
 #ifdef SDK3_1
 using namespace aliengo;
 #endif
@@ -56,31 +59,31 @@ int mainHelper(int argc, char *argv[], TLCM &roslcm)
         motiontime = motiontime+2;
         roslcm.Get(RecvHighLCM);
         RecvHighROS = ToRos(RecvHighLCM);
-        // printf("%f\n",  RecvHighROS.forwardSpeed);
+         printf("%f\n",  RecvHighROS.bodyHeight);
 
-        SendHighROS.forwardSpeed = 0.0f;
-        SendHighROS.sideSpeed = 0.0f;
-        SendHighROS.rotateSpeed = 0.0f;
+        SendHighROS.velocity[0] = 0.0f;    //   forwardspeed
+        SendHighROS.velocity[1]  = 0.0f;   //   sidespeed
+        SendHighROS.yawSpeed = 0.0f;
         SendHighROS.bodyHeight = 0.0f;
 
         SendHighROS.mode = 0;
-        SendHighROS.roll  = 0;
-        SendHighROS.pitch = 0;
-        SendHighROS.yaw = 0;
+        SendHighROS.euler[0]  = 0;       //  roll
+        SendHighROS.euler[1] = 0;        //  pitch
+        SendHighROS.euler[2] = 0;        //  yaw
 
         if(motiontime>1000 && motiontime<1500){
             SendHighROS.mode = 1;
-            // SendHighROS.roll = 0.3f;
+            SendHighROS.euler[0] = 0.3f;
         }
 
         if(motiontime>1500 && motiontime<2000){
             SendHighROS.mode = 1;
-            SendHighROS.pitch = 0.3f;
+            SendHighROS.euler[1] = 0.3f;
         }
 
         if(motiontime>2000 && motiontime<2500){
             SendHighROS.mode = 1;
-            SendHighROS.yaw = 0.2f;
+            SendHighROS.euler[2] = 0.2f;
         }
 
         if(motiontime>2500 && motiontime<3000){
@@ -104,22 +107,22 @@ int mainHelper(int argc, char *argv[], TLCM &roslcm)
 
         if(motiontime>5000 && motiontime<8500){
             SendHighROS.mode = 2;
-            SendHighROS.forwardSpeed = 0.1f; // -1  ~ +1
+            SendHighROS.velocity[0] = 0.1f; // -1  ~ +1
         }
 
         if(motiontime>8500 && motiontime<12000){
             SendHighROS.mode = 2;
-            SendHighROS.forwardSpeed = -0.2f; // -1  ~ +1
+            SendHighROS.velocity[0] = -0.2f; // -1  ~ +1
         }
 
         if(motiontime>12000 && motiontime<16000){
             SendHighROS.mode = 2;
-            SendHighROS.rotateSpeed = 0.1f;   // turn
+            SendHighROS.yawSpeed = 0.1f;   // turn
         }
 
         if(motiontime>16000 && motiontime<20000){
             SendHighROS.mode = 2;
-            SendHighROS.rotateSpeed = -0.1f;   // turn
+            SendHighROS.yawSpeed = -0.1f;   // turn
         }
 
         if(motiontime>20000 && motiontime<21000){
