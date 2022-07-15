@@ -48,7 +48,7 @@ int mainHelper(int argc, char *argv[], TLCM &roslcm)
     unitree_legged_msgs::HighCmd SendHighROS;
     unitree_legged_msgs::HighState RecvHighROS;
 
-    ros::Publisher pub_highstate = n.advertise<unitree_legged_msgs::HighState>("/unitree/high_state", 1000);
+    ros::Publisher pub_highstate = n.advertise<unitree_legged_msgs::HighState>("/unitree/robot_state", 1000);
 
     roslcm.SubscribeState();
 
@@ -60,8 +60,9 @@ int mainHelper(int argc, char *argv[], TLCM &roslcm)
         roslcm.Get(RecvHighLCM);
         RecvHighROS = ToRos(RecvHighLCM);
        //  printf("mode: %f\n",  RecvHighROS.mode);
-     printf("%f %f %f %f %f\n", RecvHighROS.imu.rpy[1], RecvHighROS.imu.rpy[2], RecvHighROS.position[0], RecvHighROS.position[1], RecvHighROS.velocity[0]);
-     printf("%f %f %f\n", RecvHighROS.motorState[3].q, RecvHighROS.motorState[4].q, RecvHighROS.motorState[5].q);
+     //printf("%f %f %f %f %f\n", RecvHighROS.imu.rpy[1], RecvHighROS.imu.rpy[2], RecvHighROS.position[0], RecvHighROS.position[1], RecvHighROS.velocity[0]);
+     //printf("%f %f %f\n", RecvHighROS.motorState[3].q, RecvHighROS.motorState[4].q, RecvHighROS.motorState[5].q);
+     printf("Max Tempurature of Calf Joint: %d %d %d %d\n", RecvHighROS.motorState[2].temperature, RecvHighROS.motorState[5].temperature, RecvHighROS.motorState[8].temperature,RecvHighROS.motorState[11].temperature );  
      
         // SendHighROS.velocity[0] = 0.0f;    //   forwardspeed
         // SendHighROS.velocity[1]  = 0.0f;   //   sidespeed
