@@ -1,3 +1,4 @@
+Header header
 uint8 levelFlag
 uint16 commVersion                  # Old version Aliengo does not have
 uint16 robotID                      # Old version Aliengo does not have
