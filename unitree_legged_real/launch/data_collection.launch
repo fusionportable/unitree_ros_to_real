@@ -1,7 +1,9 @@
 <launch>
-    
-    <include file="$(find unitree_legged_real)/launch/front_camera_read.launch" />
+    <!-- launch camera -->
+    <include file="$(find realsense2_camera)/launch/front_camera_read.launch" />
+    <!-- launch leg odometry -->
     <include file="$(find unitree_legged_real)/launch/real.launch" />
     <node pkg="unitree_legged_real" type="walk_lcm" name="walk_lcm" />
-
+    <!-- launch velodyne -->
+    <include file="$(find velodyne_pointcloud/launch/VLP16_points.launch" />
 </launch>
