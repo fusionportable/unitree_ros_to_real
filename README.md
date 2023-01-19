@@ -47,6 +47,12 @@ Before compiling `unitree_legged_real`, please make sure that the `unitree_legge
 # Setup the net connection
 First, please connect the network cable between your PC and robot. Then run `ifconfig` in a terminal, you will find your port name. For example, `enx000ec6612921`.
 
+Normally, on a ubuntu, the port number of the ethernet is something like below:
+
+![port_num](/unitree_legged_real/doc/img/port_num.png "port num illustration")
+
+in this case, the port num is `enp7s0`. Generally, `enp` suggests this is a cable ethernet port.
+
 Then, open the `ipconfig.sh` file under the folder `unitree_legged_real`, modify the port name to your own. And run the following commands:
 ```
 sudo chmod +x ipconfig.sh
