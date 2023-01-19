@@ -4,7 +4,7 @@
     <arg name="firmwork" default="3_2"/>
 
     <node pkg="unitree_legged_real" type="lcm_server_$(arg firmwork)" name="node_lcm_server"
-          respawn="false" output="screen" args="$(arg rname) $(arg ctrl_level)" />
+          respawn="false" output="screen" args="$(arg rname) $(arg ctrl_level) $(arg firmwork)" />
 
     <param name="robot_name" value="$(arg rname)"/>
     <param name="control_level" value="$(arg ctrl_level)"/>
