@@ -38,6 +38,7 @@ export UNITREE_PLATFORM="amd64"
 
 # Build
 You can use catkin_make to build ROS packages. First copy the package folder to `~/catkin_ws/src`, then:
+`don't use catkin build .....`
 ```
 cd ~/catkin_ws
 catkin_make

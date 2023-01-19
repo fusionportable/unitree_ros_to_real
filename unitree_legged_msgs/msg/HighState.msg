@@ -7,7 +7,7 @@ uint8 bandWidth                     # Old version Aliengo does not have
 uint8 mode
 uint8 gaitType                      # 0.idle  1.trot  2.trot running  3.climb stair  4.trot obstacle
 IMU imu
-MotorState[20] motorState
+MotorState[20] motorState 
 int16[4] footForce                  # Old version Aliengo is different
 int16[4] footForceEst               # Old version Aliengo does not have
 float32 progress

@@ -103,6 +103,7 @@ int mainHelper(int argc, char *argv[], TLCM &roslcm) {
     body_imu.orientation.z = RecvHighROS.imu.quaternion[2];
     body_imu.orientation.w = RecvHighROS.imu.quaternion[3];
 
+    // leg joint states original
     body_jointstate.header.stamp = ros::Time::now();
     for (int i = 0; i < 12; i++) {
       body_jointstate.position[i] = RecvHighROS.motorState[i].q;
@@ -110,6 +111,7 @@ int mainHelper(int argc, char *argv[], TLCM &roslcm) {
       body_jointstate.effort[i] = RecvHighROS.motorState[i].tauEst;
     }
 
+    // leg tip force
     for (int i = 0; i < 4; i++)
       body_jointstate.effort[12 + i] = RecvHighROS.footForce[i];
 
