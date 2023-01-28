@@ -38,7 +38,7 @@ int mainHelper(int argc, char *argv[], TLCM &roslcm) {
   std::cout << "WARNING: Control level is set to HIGH-level." << std::endl
             << "Make sure the robot is standing on the ground." << std::endl
             << "Press Enter to continue..." << std::endl;
-  std::cin.ignore();
+  // std::cin.ignore();
 
   ros::NodeHandle n;
   ros::Rate loop_rate(500);
