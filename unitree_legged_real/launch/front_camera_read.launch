@@ -25,7 +25,7 @@
     <arg name="cf_enable_depth"        default="false"/>
     <arg name="cf_enable_infra1"       default="true"/>
     <arg name="cf_enable_infra2"       default="true"/>
-    <arg name="cf_enable_color"        default="false"/>
+    <arg name="cf_enable_color"        default="true"/>
 
     <arg name="cf_gyro_fps"            default="400"/>
     <arg name="cf_accel_fps"           default="250"/>
