@@ -1,0 +1,11 @@
+<launch>
+    <!-- launch camera -->
+    <include file="$(find realsense2_camera)/launch/front_camera_read.launch" />
+    <!-- launch leg odometry -->
+    <!-- <include file="$(find unitree_legged_real)/launch/real.launch" /> -->
+    <!-- launch velodyne -->
+    <include file="$(find velodyne_pointcloud)/launch/VLP16_points.launch" />
+    <!-- launch rviz -->
+    <!-- <node pkg="unitree_legged_real" type="walk_lcm" name="walk_lcm" /> -->
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find unitree_legged_real)/config/rviz/data_collection.rviz" />
+</launch>
