@@ -1,6 +1,6 @@
 <launch>
     <!-- launch camera -->
-    <include file="$(find realsense2_camera)/launch/front_camera_read.launch" />
+    <include file="$(find unitree_legged_real)/launch/front_camera_read.launch" />
     <!-- launch leg odometry -->
     <!-- <include file="$(find unitree_legged_real)/launch/real.launch" /> -->
     <!-- launch velodyne -->
