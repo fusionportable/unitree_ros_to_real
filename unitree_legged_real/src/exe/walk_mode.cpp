@@ -35,10 +35,13 @@ void *update_loop(void *param) {
 
 template <typename TCmd, typename TState, typename TLCM>
 int mainHelper(int argc, char *argv[], TLCM &roslcm) {
+  
+  ROS_INFO("Walk Mode Initiate");
+
   std::cout << "WARNING: Control level is set to HIGH-level." << std::endl
             << "Make sure the robot is standing on the ground." << std::endl
             << "Press Enter to continue..." << std::endl;
-  // std::cin.ignore();
+  std::cin.ignore();
 
   ros::NodeHandle n;
   ros::Rate loop_rate(500);
@@ -140,6 +143,7 @@ int mainHelper(int argc, char *argv[], TLCM &roslcm) {
     body_odom.twist.twist.linear.z = RecvHighROS.velocity[2];
     body_odom.twist.twist.angular.z = RecvHighROS.yawSpeed;   //rad/s
 
+    // ROS_INFO(Joint );
     printf("Max Tempurature of Calf Joint: %d %d %d %d\n",
            RecvHighROS.motorState[2].temperature,
            RecvHighROS.motorState[5].temperature,
